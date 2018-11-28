@@ -3,7 +3,10 @@ import asyncio
 import json
 from discord.ext import commands
 
-startup_extensions = []
+startup_extensions = [
+"cogs.events",
+"cogs.no_erp"
+]
 
 client = discord.Client()
 
@@ -20,11 +23,6 @@ client = commands.Bot(command_prefix=('maid.'),
 
 client.remove_command('help')
 client.load_extension("jishaku")
-
-@client.event
-async def on_ready():
-	print("logged in as {0.user.name}\n ID: {0.user.id}".format(client))
-
 
 if __name__ == "__main__":
 	for extension in startup_extensions:
