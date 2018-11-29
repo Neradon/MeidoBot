@@ -5,7 +5,8 @@ from discord.ext import commands
 
 startup_extensions = [
 "cogs.events",
-"cogs.no_erp"
+"cogs.no_erp",
+"cogs.clever"
 ]
 
 client = discord.Client()
@@ -15,7 +16,7 @@ with open('token.json') as token_file:
 token = data['token']
 
 
-client = commands.Bot(command_prefix=('maid.'),
+client = commands.Bot(command_prefix=('#','maid.'),
 					pm_help=True,
 					case_insensitive=True,
 					owner_id=115895386606010376,
