@@ -1,10 +1,15 @@
 #script scuffed by bahka, fixed up by Sparky
 
 import discord
+import json
 from discord.ext import commands
 from cleverwrap import CleverWrap
 
-cw = CleverWrap('CCCrw8x-1eic8qi3Q-mrPc1Sutw')
+with open('token.json') as token_file:
+	data = json.load(token_file)
+clevertoken = data['clevertoken']
+
+cw = CleverWrap(clevertoken)
 
 class clever:
 	def __init__(self, client):
@@ -12,12 +17,13 @@ class clever:
 
 	@commands.command()
 	async def clever(self, ctx):
-		param = ctx.message.content[2:]
-		if len(param) > 2:
+		param = ctx.message.content
+		await ctx.send(cw.say(param))
 
-			await ctx.channel.send(cw.say(param))
-		else:
-			await ctx.channel.send('use !m <message>')
+	@commands.command()
+	async def clever_reset(self, ctx):
+		cw.reset()
+		await ctx.send("Reset conversation!")
 
 def setup(client):
 	client.add_cog(clever(client))
