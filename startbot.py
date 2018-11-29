@@ -37,10 +37,10 @@ async def background_loop():
 				online.append(member)
 			elif member.status == discord.Status.dnd:
 				online.append(member)
-		onlinemaid = "{0} maids!".format(str(len(set(online))))
+		onlinemaid = "{0} maids!".format(str(len(set(online)) -1))
 
 		await client.change_presence(activity=discord.Activity(name=onlinemaid, type=3))
-		print("updated player_count, now " + str(len(set(online))))
+		print("updated maid count, now " + str(len(set(online))))
 		await asyncio.sleep(120)
 
 if __name__ == "__main__":
