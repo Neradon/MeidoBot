@@ -15,8 +15,8 @@ class clever:
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command()
-	async def cb(self, ctx, arg1):
+	@commands.command(aliases=["cb"])
+	async def clever(self, ctx, arg1):
 		await ctx.send(cw.say(arg1))
 
 	@cb.error
@@ -24,8 +24,8 @@ class clever:
 		if isinstance(error, commands.MissingRequiredArgument):
 			await ctx.send("Please enter a message with quotation marks around it!")
 
-	@commands.command()
-	async def cb_reset(self, ctx):
+	@commands.command(aliases=["cb_reset"])
+	async def clever_reset(self, ctx):
 		cw.reset()
 		await ctx.send("Reset conversation!")
 
