@@ -19,8 +19,8 @@ class clever:
 	async def clever(self, ctx, arg1):
 		await ctx.send(cw.say(arg1))
 
-	@cb.error
-	async def cb_error(self, ctx, error):
+	@clever.error
+	async def clever_error(self, ctx, error):
 		if isinstance(error, commands.MissingRequiredArgument):
 			await ctx.send("Please enter a message with quotation marks around it!")
 
