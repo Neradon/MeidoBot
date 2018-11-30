@@ -24,7 +24,7 @@ class clever:
 		if isinstance(error, commands.MissingRequiredArgument):
 			await ctx.send("Please enter a message with quotation marks around it!")
 
-	@commands.command()
+	@commands.command(aliases=["cb_reset"])
 	async def clever_reset(self, ctx):
 		cw.reset()
 		await ctx.send("Reset conversation!")
