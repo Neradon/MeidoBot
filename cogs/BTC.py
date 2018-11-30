@@ -1,7 +1,8 @@
 import json
 import discord
-from discord.ext import commands
 import requests
+from discord.ext import commands
+
 urll = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json'
 
 class BTC:
@@ -17,5 +18,4 @@ class BTC:
 
 def setup(client):
 	client.add_cog(BTC(client))
-
-
+	
