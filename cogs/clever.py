@@ -15,7 +15,7 @@ class clever:
 	def __init__(self, client):
 		self.client = client
 
-	@commands.command()
+	@commands.command(aliases=["cb"])
 	async def clever(self, ctx, arg1):
 		await ctx.send(cw.say(arg1))
 
