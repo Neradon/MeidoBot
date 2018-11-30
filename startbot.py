@@ -40,7 +40,7 @@ async def background_loop():
 		onlinemaid = "{0} maids!".format(str(len(set(online)) -1))
 
 		await client.change_presence(activity=discord.Activity(name=onlinemaid, type=3))
-		print("updated maid count, now " + str(len(set(online))))
+		print("updated maid count, now " + str(len(set(online)) -1))
 		await asyncio.sleep(120)
 
 if __name__ == "__main__":
