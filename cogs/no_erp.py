@@ -11,7 +11,7 @@ class no_erp:
 		messagecontent = ctx.content.lower()
 		if messagecontent == "no erp":
 			return
-		elif "erp" in messagecontent or "lewd" in messagecontent:
+		elif " erp" in messagecontent or " lewd" in messagecontent:
 			await ctx.channel.send("NO ERP")
 
 def setup(client):
