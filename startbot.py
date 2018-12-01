@@ -8,7 +8,8 @@ startup_extensions = [
 "cogs.no_erp",
 "cogs.clever",
 "cogs.reddit",
-"cogs.BTC"
+"cogs.BTC",
+"cogs.vrc"
 ]
 
 client = discord.Client()
