@@ -16,7 +16,8 @@ class clever:
 		self.client = client
 
 	@commands.command(aliases=["cb"])
-	async def clever(self, ctx, arg1):
+	async def clever(self, ctx, *args):
+		arg1 = ("{} " * len(args)).format(*args)
 		await ctx.send(cw.say(arg1))
 
 	@clever.error
