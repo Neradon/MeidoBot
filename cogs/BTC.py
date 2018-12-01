@@ -14,4 +14,3 @@ class BTC:
 
 def setup(client):
 	client.add_cog(BTC(client))
-	

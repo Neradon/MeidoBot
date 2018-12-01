@@ -9,7 +9,9 @@ startup_extensions = [
 "cogs.clever",
 "cogs.reddit",
 "cogs.BTC",
-"cogs.vrc"
+"cogs.vrc",
+"cogs.mods",
+"cogs.update"
 ]
 
 client = discord.Client()
@@ -20,9 +22,9 @@ token = data['token']
 prefix = data['prefix']
 
 client = commands.Bot(command_prefix=(prefix),
-					pm_help=True,
+					pm_help=False,
 					case_insensitive=True,
-					owner_id=115895386606010376)
+					owner_id=222255802000343040)
 
 client.remove_command('help')
 client.load_extension("jishaku")
