@@ -10,7 +10,7 @@ class no_erp:
         if message.author == self.client.user:
             return
         text = message.content
-        text = re.sub(r'[^\w\s]','', text).split()
+        text = re.sub(r'[^\w\s]','', text).lower().split()
         if "no" in text and "erp" in text:
             return
         elif "erp" in text or "lewd" in text:
