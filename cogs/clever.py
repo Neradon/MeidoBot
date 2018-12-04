@@ -17,7 +17,7 @@ class clever:
 
 	@commands.command(aliases=["cb"])
 	async def clever(self, ctx, *args):
-		arg1 = ("{} " * len(args)).format(*args)
+		arg1 = ("{} ").format(*args)
 		await ctx.send(cw.say(arg1))
 
 	@clever.error

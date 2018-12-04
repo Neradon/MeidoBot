@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import discord
 import asyncio
 import json
@@ -9,8 +11,7 @@ startup_extensions = [
 "cogs.clever",
 "cogs.reddit",
 "cogs.BTC",
-"cogs.vrc",
-"cogs.mods",
+"cogs.husbando",
 "cogs.update"
 ]
 
@@ -22,9 +23,9 @@ token = data['token']
 prefix = data['prefix']
 
 client = commands.Bot(command_prefix=(prefix),
-					pm_help=False,
+					pm_help=True,
 					case_insensitive=True,
-					owner_id=222255802000343040)
+					owner_id=115895386606010376)
 
 client.remove_command('help')
 client.load_extension("jishaku")
