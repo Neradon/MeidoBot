@@ -7,7 +7,7 @@ from cleverwrap import CleverWrap
 
 with open('token.json') as token_file:
     data = json.load(token_file)
-clevertoken = data['clevertoken']
+clevertoken = data['tokens']['clevertoken']
 
 cw = CleverWrap(clevertoken)
 
