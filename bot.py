@@ -90,7 +90,7 @@ async def twitchlive():
                 with open('token.json', 'w') as talk1:
                     
                     data1['live_noti'] = "alreadysend"
-                    data1['discord_message_id'] = livemessage.id
+                    data1['discord_message_id'] = "{0}".format(livemessage.id)
                     json.dump(data1, talk1)
                     talk1.close()
 
