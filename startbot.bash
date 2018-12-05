@@ -2,8 +2,9 @@
 
 while true; do
     git pull git://github.com/LSparky/MeidoBot.git
-    echo "waiting 4 seconds"
-    sleep 4
+    sed -i '' 's/alreadysend/notsendyet/g' token.json
+    echo "waiting 2 seconds"
+    sleep 2
     ./bot.py
     echo " "
     echo "You can exit the loop by doing ctrl + c 2x"
