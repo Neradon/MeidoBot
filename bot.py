@@ -69,7 +69,7 @@ async def twitchlive():
         stream = requests.get("https://api.twitch.tv/helix/streams?user_login={0}".format(streamer), headers=data).json()
 
         if len(stream['data']) > 0:
-            if data1['live_noti'] == "1":
+            if data1['live_noti'] == "notsendyet":
                 user = requests.get("https://api.twitch.tv/helix/users?login={0}".format(streamer), headers=data).json()
                 game = requests.get("https://api.twitch.tv/helix/games?id={0}".format(stream['data'][0]['game_id']), headers=data).json()
 
@@ -89,7 +89,7 @@ async def twitchlive():
 
                 with open('token.json', 'w') as talk1:
                     
-                    data1['live_noti'] = "0"
+                    data1['live_noti'] = "alreadysend"
                     data1['discord_message_id'] = livemessage.id
                     json.dump(data1, talk1)
                     talk1.close()
@@ -97,7 +97,7 @@ async def twitchlive():
         else:
             with open('token.json', 'w') as talk1:
 
-                data1['live_noti'] = "1"
+                data1['live_noti'] = "notsendyet"
                 json.dump(data1, talk1)
                 talk1.close()
 
