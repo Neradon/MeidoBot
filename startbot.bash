@@ -2,7 +2,7 @@
 
 while true; do
     git pull git://github.com/LSparky/MeidoBot.git
-    sed  -i 's/alreadysend/notsendyet/g' token.json
+    sed  -i 's/alreadysend/notsendyet/g' twitch.json
     echo "waiting 2 seconds"
     sleep 2
     ./bot.py
