@@ -6,8 +6,8 @@ from discord.ext import commands
 
 with open('token.json') as token_file:
 	data = json.load(token_file)
-clientid = data['tokens']['reddit_clientid']
-client_secret = data['tokens']['reddit_client_secret']
+clientid = data['tokens']['reddit']['reddit_clientid']
+client_secret = data['tokens']['reddit']['reddit_client_secret']
 
 r = praw.Reddit(client_id=clientid, client_secret=client_secret, user_agent='Meido Bot')
 

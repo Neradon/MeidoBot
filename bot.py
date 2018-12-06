@@ -19,15 +19,17 @@ startup_extensions = [
 
 client = discord.Client()
 
-with open('token.json') as token_file:
-    data = json.load(token_file)
-token = data['tokens']['discord_token']
-prefix = data['prefix']
+with open('token.json') as startup_data_file:
+    startup_data = json.load(startup_data_file)
+    startup_data_file.close()
+    token = startup_data['tokens']['discord']['discord_token']
+    prefix = startup_data['bot_settings']['prefix']
 
 client = commands.Bot(command_prefix=(prefix),
-                    pm_help=True,
-                    case_insensitive=True,
-                    owner_id=115895386606010376)
+                      pm_help=True,
+                      case_insensitive=True,
+                      owner_id=115895386606010376)
+
 
 client.remove_command('help')
 client.load_extension("jishaku")
@@ -54,58 +56,67 @@ async def twitchlive():
     while True:
         await client.wait_until_ready()
 
-        with open('token.json') as talk1:
+        with open('twitch.json') as talk1:
             data1 = json.load(talk1)
             talk1.close()
 
-        with open('twitch.json') as talk:
-            data = json.load(talk)
-            talk.close()
-
-
-        streamer = data1['streamer']
+        twitch_client_id = data1['token']['Twitch_Client-ID']
+        streamers = data1['streamers']
         livemessage = None
 
-        stream = requests.get("https://api.twitch.tv/helix/streams?user_login={0}".format(streamer), headers=data).json()
+        for streamer in streamers:
 
-        if len(stream['data']) > 0:
-            if data1['live_noti'] == "notsendyet":
-                user = requests.get("https://api.twitch.tv/helix/users?login={0}".format(streamer), headers=data).json()
-                game = requests.get("https://api.twitch.tv/helix/games?id={0}".format(stream['data'][0]['game_id']), headers=data).json()
+            if streamer == data1['streamers'][0]:
+                live_notification = data1['discord']['live_notification']['streamer1']
+                returndata_sendmsg = 'streamer1'
+                returndata_msgid = 'disc_msg_id_str1'
+            elif streamer == data1['streamers'][1]:
+                live_notification = data1['discord']['live_notification']['streamer2']
+                returndata_sendmsg = 'streamer2'
+                returndata_msgid = 'disc_msg_id_str2'
 
-                embed = discord.Embed(title=stream['data'][0]['title'], colour=discord.Colour(0x4b387a), url="https://twitch.tv/{}".format(streamer))
-                embed.set_image(url=stream['data'][0]['thumbnail_url'].format(width='1920', height='1080'))
-                embed.set_thumbnail(url=game['data'][0]['box_art_url'].format(width='272', height='380'))
-                embed.set_author(name=stream['data'][0]['user_name'],
-                                 icon_url=user['data'][0]['profile_image_url'])
-                embed.set_footer(text="Twitch Livestream",
-                                 icon_url="https://pngimg.com/uploads/twitch/twitch_PNG22.png")
+            stream = requests.get("https://api.twitch.tv/helix/streams?user_id={0}".format(streamer),
+                                  headers=twitch_client_id).json()
 
-                embed.add_field(name="Game:", value=game['data'][0]['name'], inline=True)
-                embed.add_field(name="Viewers", value=stream['data'][0]['viewer_count'], inline=True)
+            if len(stream['data']) > 0:
+                if live_notification == "notsendyet":
+                    user = requests.get("https://api.twitch.tv/helix/users?id={0}".format(streamer),
+                                        headers=twitch_client_id).json()
+                    game = requests.get("https://api.twitch.tv/helix/games?id={0}".format(stream['data'][0]['game_id']),
+                                        headers=twitch_client_id).json()
 
-                channel = client.get_channel(int(data1['discord_twitch_channel']))
-                livemessage = await channel.send(embed=embed)
+                    embed = discord.Embed(title=stream['data'][0]['title'], colour=discord.Colour(0x4b387a),
+                                          url="https://twitch.tv/{}".format(streamer))
+                    embed.set_image(url=stream['data'][0]['thumbnail_url'].format(width='1920', height='1080'))
+                    embed.set_thumbnail(url=game['data'][0]['box_art_url'].format(width='272', height='380'))
+                    embed.set_author(name=stream['data'][0]['user_name'],
+                                     icon_url=user['data'][0]['profile_image_url'])
+                    embed.set_footer(text="Twitch Livestream",
+                                     icon_url="https://pngimg.com/uploads/twitch/twitch_PNG22.png")
 
-                with open('token.json', 'w') as talk1:
-                    
-                    data1['live_noti'] = "alreadysend"
-                    data1['discord_message_id'] = "{0}".format(livemessage.id)
-                    json.dump(data1, talk1)
-                    talk1.close()
+                    embed.add_field(name="Game:", value=game['data'][0]['name'], inline=True)
+                    embed.add_field(name="Viewers", value=stream['data'][0]['viewer_count'], inline=True)
 
-        else:
-            with open('token.json', 'w') as talk1:
+                    channel = client.get_channel(int(data1['discord']['discord_channel']))
+                    livemessage = await channel.send(embed=embed)
 
-                data1['live_noti'] = "notsendyet"
-                json.dump(data1, talk1)
-                talk1.close()
+                    with open('twitch.json', 'w') as returndata:
+                        data1['discord']['live_notification']["{}".format(returndata_sendmsg)] = "alreadysend"
+                        data1['discord']['live_notification']["{}".format(returndata_msgid)] = "{0}".format(livemessage.id)
+                        json.dump(data1, returndata)
+                        talk1.close()
 
-            if livemessage is not None:
-                await livemessage.delete()
+                else:
+                    with open('twitch.json', 'w') as returndata:
+
+                        data1['discord']['live_notification']["{}".format(returndata_sendmsg)] = "notsendyet"
+                        json.dump(data1, returndata)
+                        talk1.close()
+
+                    if livemessage is not None:
+                        await livemessage.delete()
 
         await asyncio.sleep(420)
-
 
 if __name__ == "__main__":
     for extension in startup_extensions:
