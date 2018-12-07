@@ -74,8 +74,7 @@ async def twitchlive():
                 returndata_sendmsg = 'streamer2'
                 returndata_msgid = 'disc_msg_id_str2'
 
-            stream = requests.get("https://api.twitch.tv/helix/streams?user_id={0}".format(streamer),
-                                  headers=twitch_client_id).json()
+            stream = requests.get("https://api.twitch.tv/helix/streams?user_id={0}".format(streamer), headers=twitch_client_id, timeout=None).json()
 
             if len(stream['data']) > 0:
                 if live_notification == "notsendyet":
@@ -115,7 +114,7 @@ async def twitchlive():
                     await livemessage.delete()
 
         await asyncio.sleep(1200)
-        
+
 if __name__ == "__main__":
     for extension in startup_extensions:
         try:
