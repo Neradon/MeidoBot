@@ -50,7 +50,7 @@ async def background_loop():
 
         await client.change_presence(activity=discord.Activity(name=onlinemaid, type=3))
         print("updated maid count, now " + str(len(set(online)) -1))
-        await asyncio.sleep(420)
+        await asyncio.sleep(600)
 
 async def twitchlive():
     while True:
@@ -116,7 +116,7 @@ async def twitchlive():
                     if livemessage is not None:
                         await livemessage.delete()
 
-        await asyncio.sleep(420)
+        await asyncio.sleep(900)
 
 if __name__ == "__main__":
     for extension in startup_extensions:
