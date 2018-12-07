@@ -113,7 +113,8 @@ async def twitchlive():
                 if livemessage is not None:
                     await livemessage.delete()
 
-        await asyncio.sleep(1200)
+        await asyncio.sleep(900)
+
 
 if __name__ == "__main__":
     for extension in startup_extensions:
