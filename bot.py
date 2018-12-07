@@ -4,7 +4,6 @@ import discord
 import asyncio
 import requests
 import json
-import urllib.parse
 from discord.ext import commands
 
 startup_extensions = [
@@ -50,7 +49,7 @@ async def background_loop():
 
         await client.change_presence(activity=discord.Activity(name=onlinemaid, type=3))
         print("updated maid count, now " + str(len(set(online)) -1))
-        await asyncio.sleep(420)
+        await asyncio.sleep(600)
 
 async def twitchlive():
     while True:
@@ -86,7 +85,7 @@ async def twitchlive():
                                         headers=twitch_client_id).json()
 
                     embed = discord.Embed(title=stream['data'][0]['title'], colour=discord.Colour(0x4b387a),
-                                          url="https://twitch.tv/{}".format(streamer))
+                                          url="https://twitch.tv/{}".format(stream['data'][0]['user_name']))
                     embed.set_image(url=stream['data'][0]['thumbnail_url'].format(width='1920', height='1080'))
                     embed.set_thumbnail(url=game['data'][0]['box_art_url'].format(width='272', height='380'))
                     embed.set_author(name=stream['data'][0]['user_name'],
@@ -106,17 +105,16 @@ async def twitchlive():
                         json.dump(data1, returndata)
                         talk1.close()
 
-                else:
-                    with open('twitch.json', 'w') as returndata:
+            else:
+                with open('twitch.json', 'w') as returndata:
+                    data1['discord']['live_notification']["{}".format(returndata_sendmsg)] = "notsendyet"
+                    json.dump(data1, returndata)
+                    talk1.close()
 
-                        data1['discord']['live_notification']["{}".format(returndata_sendmsg)] = "notsendyet"
-                        json.dump(data1, returndata)
-                        talk1.close()
+                if livemessage is not None:
+                    await livemessage.delete()
 
-                    if livemessage is not None:
-                        await livemessage.delete()
-
-        await asyncio.sleep(420)
+        await asyncio.sleep(1200)
 
 if __name__ == "__main__":
     for extension in startup_extensions:
