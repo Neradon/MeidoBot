@@ -13,7 +13,8 @@ startup_extensions = [
 "cogs.reddit",
 "cogs.BTC",
 "cogs.husbando",
-"cogs.update"
+"cogs.update",
+"cogs.userinfo"
 ]
 
 client = discord.Client()
