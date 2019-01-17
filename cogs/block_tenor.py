@@ -9,7 +9,7 @@ class block_tenor:
         if message.author == self.client.user:
             return
         text = message.content.lower()
-        if "https://tenor.com/view" in text:
+        if "https://tenor.com" in text:
             await message.delete()
 
 def setup(client):
