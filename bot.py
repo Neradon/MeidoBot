@@ -14,7 +14,8 @@ startup_extensions = [
 "cogs.BTC",
 "cogs.husbando",
 "cogs.update",
-"cogs.userinfo"
+"cogs.userinfo",
+"cogs.vrcEmbed"
 ]
 
 client = discord.Client()
