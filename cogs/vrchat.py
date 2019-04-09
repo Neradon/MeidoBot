@@ -1,5 +1,6 @@
 import discord
 import requests
+import json
 from discord.ext import commands
 from vrchat_api import VRChatAPI
 from requests.auth import HTTPBasicAuth
