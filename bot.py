@@ -94,17 +94,17 @@ async def background_loop():
         if len(client.acceptFriends) > 0:
             await asyncio.sleep(60)
             friends = client.api.getFriendRequests()
-            af = ""
             for f in friends:
                 print("Friendrequest: "+f.senderUsername)
                 if f.senderUsername in client.acceptFriends:
-                    af = f
+                    print("Accepting " + f.senderUsername + " with id: " + f.id)
+                    await asyncio.sleep(60)
+                    client.api.acceptFriendRequest(f.id)
+                    client.acceptFriends.remove(f.senderUsername)
                     break
-            if af != "":
-                print("Accepting "+af.senderUsername +" with id: "+af.id)
-                client.acceptFriends.remove(af.senderUsername)
-                await asyncio.sleep(60)
-                client.api.acceptFriendRequest(af.id)
+
+
+
 
 
         await asyncio.sleep(60)
