@@ -1,0 +1,6 @@
+*.json
+*.pyc
+.idea/
+.DS_Store
+backup/
+gettwitchuserid.py
