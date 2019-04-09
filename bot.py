@@ -40,6 +40,8 @@ client.api = VRChatAPI(vrcuser, vrcpw)
 client.api.authenticate()
 client.cuttly = cuttly
 client.friends = []
+client.acceptFriends = []
+client.vrcCalls = []
 
 client.remove_command('help')
 client.load_extension("jishaku")
@@ -79,9 +81,9 @@ async def background_loop():
         print("updated maid count, now " + str(len(client.friends)))
 
         if worldIdToCheck != "":
-            print("Getting worldname: "+worldIdToCheck)
+            print("Waiting for Worldcheckcooldown...")
             await asyncio.sleep(60)
-
+            print("Getting worldname: " + worldIdToCheck)
             worldName = client.api.getWorldById(worldIdToCheck).name
             with open("worlds.json") as json_file:
                 worlds = json.load(json_file)
@@ -89,6 +91,19 @@ async def background_loop():
 
             with open("worlds.json", "w") as outfile:
                 json.dump(worlds, outfile)
+        if len(client.acceptFriends) > 0:
+            await asyncio.sleep(60)
+            friends = client.api.getFriendRequests()
+            af = ""
+            for f in friends:
+                print("Friendrequest: "+f.senderUsername)
+                if f.senderUsername in client.acceptFriends:
+                    af = f
+                    break
+            if af != "":
+                client.acceptFriends.remove(af.senderUsername)
+                await asyncio.sleep(60)
+                client.api.acceptFriendRequest(af.id)
 
 
         await asyncio.sleep(60)

@@ -45,17 +45,16 @@ class vrchat:
         await ctx.send(s)
 
     @commands.command()
-    async def acceptFriends(self, ctx):
-        '''
-        s = "Accepted friends:\n"
-        friends = api.getFriendRequests()
-        for f in friends:
-            s += f.senderUsername + "\n"
-            api.acceptFriendRequest(f.id)
-        if s == "Accepted friends:\n":
-            s = "No friendrequests"
-        '''
-        s = "Coming soon..."
+    async def addFriend(self, ctx, name):
+
+        if name != "":
+            if name in self.client.acceptFriends:
+                s = "You are already in my list!"
+            else:
+                s = "Added you to my list!"
+                self.client.acceptFriends.append(name)
+        else:
+            s = "Syntax is $addFriend YourVRChatName"
         await ctx.send(s)
 
 
