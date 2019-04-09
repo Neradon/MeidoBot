@@ -14,9 +14,9 @@ class vrchat:
         s = "**[Battlemaids online]**\n"
         friends = self.client.friends
         for f in friends:
-            if f.location.worldId != "private":
+            if f.location.worldId != "private" and "~hidden" in f.location.instanceId == False:
                 url = requests.get(
-                    "https://cutt.ly/api/api.php?key=" + self.client.cuttly + "&short=+http://neradonien.de/redirect.php?world=" + f.location.worldId + ":" + f.location.instanceId,
+                    "https://cutt.ly/api/api.php?key=" + self.client.cuttly + "&short=http://neradonien.de/redirect.php?world=" + f.location.worldId + ":" + f.location.instanceId,
                 )
                 s += f.username+" - "+f.worldName+" -> "+str(url)
             elif f.location.worldId == "private":
