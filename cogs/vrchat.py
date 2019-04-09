@@ -19,16 +19,16 @@ class vrchat:
             if(f.location.worldId == "private"):
                 s += f.worldName + " <a:HNNNNG:470332847190966319>"
             elif "~hidden" in f.location.instanceId:
-                s += "friends"
+                s += f.worldName + " -> friends only"
             else:
                 ret = requests.get(
                     "https://cutt.ly/api/api.php?key=" + self.client.cuttly + "&short=http://neradonien.de/redirect.php?world=" + f.location.worldId + ":" + f.location.instanceId,
                 )
                 data = json.loads(ret.text)
                 if data["url"]["status"] == 7:
-                    s += "public -> " + str(data["url"]["shortLink"])
+                    s += f.worldName+" -> " + str(data["url"]["shortLink"])
                 else:
-                    s += "unknown"
+                    s += f.worldName + " -> unknown"
 
 
         if s == "**[Battlemaids online]**\n":
