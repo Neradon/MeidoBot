@@ -15,7 +15,7 @@ class vrchat:
         s = "**[Battlemaids online]**\n"
         friends = self.client.friends
         for f in friends:
-            s += f.username + " - "
+            s += f.displayName + " - "
             if f.location.worldId == "private":
                 s += f.worldName + " <a:HNNNNG:470332847190966319>"
             elif "~hidden" in f.location.instanceId:
