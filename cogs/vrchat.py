@@ -1,7 +1,8 @@
 import discord
+import requests
 from discord.ext import commands
 from vrchat_api import VRChatAPI
-
+from requests.auth import HTTPBasicAuth
 
 
 class vrchat:
@@ -14,7 +15,10 @@ class vrchat:
         friends = self.client.friends
         for f in friends:
             if f.location.worldId != "private":
-                s += f.username+" - "+f.worldName+" -> http://neradonien.de/redirect.php?world="+f.location.worldId+":"+f.location.instanceId+""
+                url = request.get(
+                    "https://cutt.ly/api/api.php?key=" + self.client.cuttly + "&short=+http://neradonien.de/redirect.php?world=" + f.location.worldId + ":" + f.location.instanceId,
+                )
+                s += f.username+" - "+f.worldName+" -> "+url
             elif f.location.worldId == "private":
                 s += f.username + " - " + f.worldName + " <a:HNNNNG:470332847190966319>"
             else:

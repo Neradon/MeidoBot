@@ -29,6 +29,7 @@ with open('token.json') as startup_data_file:
     prefix = startup_data['bot_settings']['prefix']
     vrcuser = startup_data['tokens']['vrchat']['username']
     vrcpw = startup_data['tokens']['vrchat']['password']
+    client.cuttly = startup_data['tokens']['cuttly']['apiKey']
 
 client = commands.Bot(command_prefix=(prefix),
                       pm_help=True,
