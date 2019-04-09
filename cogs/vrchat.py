@@ -15,7 +15,7 @@ class vrchat:
         friends = self.client.friends
         for f in friends:
             if f.location.worldId != "private":
-                url = request.get(
+                url = requests.get(
                     "https://cutt.ly/api/api.php?key=" + self.client.cuttly + "&short=+http://neradonien.de/redirect.php?world=" + f.location.worldId + ":" + f.location.instanceId,
                 )
                 s += f.username+" - "+f.worldName+" -> "+url
