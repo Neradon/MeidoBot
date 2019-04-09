@@ -18,7 +18,7 @@ class vrchat:
                 url = requests.get(
                     "https://cutt.ly/api/api.php?key=" + self.client.cuttly + "&short=+http://neradonien.de/redirect.php?world=" + f.location.worldId + ":" + f.location.instanceId,
                 )
-                s += f.username+" - "+f.worldName+" -> "+url
+                s += f.username+" - "+f.worldName+" -> "+str(url)
             elif f.location.worldId == "private":
                 s += f.username + " - " + f.worldName + " <a:HNNNNG:470332847190966319>"
             else:

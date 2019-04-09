@@ -39,6 +39,7 @@ client = commands.Bot(command_prefix=(prefix),
 client.api = VRChatAPI(vrcuser, vrcpw)
 client.api.authenticate()
 client.cuttly = cuttly
+client.friends = []
 
 client.remove_command('help')
 client.load_extension("jishaku")
