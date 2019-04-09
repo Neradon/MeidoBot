@@ -29,7 +29,7 @@ with open('token.json') as startup_data_file:
     prefix = startup_data['bot_settings']['prefix']
     vrcuser = startup_data['tokens']['vrchat']['username']
     vrcpw = startup_data['tokens']['vrchat']['password']
-    client.cuttly = startup_data['tokens']['cuttly']['apiKey']
+    cuttly = startup_data['tokens']['cuttly']['apiKey']
 
 client = commands.Bot(command_prefix=(prefix),
                       pm_help=True,
@@ -38,6 +38,7 @@ client = commands.Bot(command_prefix=(prefix),
 
 client.api = VRChatAPI(vrcuser, vrcpw)
 client.api.authenticate()
+client.cuttly = cuttly
 
 client.remove_command('help')
 client.load_extension("jishaku")
