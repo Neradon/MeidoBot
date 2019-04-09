@@ -16,7 +16,7 @@ class vrchat:
         friends = self.client.friends
         for f in friends:
             s += f.username + " - "
-            if(f.location.worldId == "private"):
+            if f.location.worldId == "private":
                 s += f.worldName + " <a:HNNNNG:470332847190966319>"
             elif "~hidden" in f.location.instanceId:
                 s += f.worldName + " -> friends only"
@@ -29,7 +29,7 @@ class vrchat:
                     s += f.worldName+" -> " + str(data["url"]["shortLink"])
                 else:
                     s += f.worldName + " -> unknown"
-
+            s += "\n"
 
         if s == "**[Battlemaids online]**\n":
             s = "No Battlemaid online <:maidHands:463442634728538122>"
