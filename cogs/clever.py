@@ -11,7 +11,7 @@ clevertoken = data['tokens']['cleverbot']['clevertoken']
 
 cw = CleverWrap(clevertoken)
 
-class clever:
+class clever(commands.Cog):
     def __init__(self, client):
         self.client = client
 

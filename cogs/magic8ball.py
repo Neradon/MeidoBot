@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import random
 
-class magic8ball:
+class magic8ball(commands.Cog):
     def __init__(self, client):
         self.client = client
 

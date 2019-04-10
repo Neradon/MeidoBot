@@ -2,7 +2,7 @@ import discord
 import random
 from discord.ext import commands
 
-class vrc:
+class vrc(commands.Cog):
     def __init__(self, client):
         self.client = client
 

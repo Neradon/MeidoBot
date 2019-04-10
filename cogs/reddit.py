@@ -11,7 +11,7 @@ client_secret = data['tokens']['reddit']['reddit_client_secret']
 
 r = praw.Reddit(client_id=clientid, client_secret=client_secret, user_agent='Meido Bot')
 
-class reddit:
+class reddit(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 

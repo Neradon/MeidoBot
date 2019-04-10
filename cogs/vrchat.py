@@ -6,7 +6,7 @@ from vrchat_api import VRChatAPI
 from requests.auth import HTTPBasicAuth
 
 
-class vrchat:
+class vrchat(commands.Cog):
     def __init__(self, client):
         self.client = client
 

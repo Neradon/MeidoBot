@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class block_tenor:
+class block_tenor(commands.Cog):
     def __init__(self, client):
         self.client = client
 

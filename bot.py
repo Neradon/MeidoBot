@@ -44,8 +44,9 @@ client.acceptFriends = []
 client.vrcCalls = []
 
 client.remove_command('help')
+'''
 client.load_extension("jishaku")
-
+'''
 async def background_loop():
     while True:
         await client.wait_until_ready()

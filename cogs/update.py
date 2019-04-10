@@ -2,7 +2,7 @@ import json
 import requests
 from discord.ext import commands
 
-class Update:
+class Update(commands.Cog):
     def __init__(self, client):
         self.client = client
 
