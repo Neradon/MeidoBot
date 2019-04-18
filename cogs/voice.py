@@ -2,7 +2,8 @@ import discord
 import re
 from discord.ext import commands
 
-class voice(commands.Cog):
+
+class voice():
     def __init__(self, client):
         self.client = client
 
