@@ -21,7 +21,7 @@ class voice(commands.Cog):
                 if message.author.voice.channel.id == 528329844044333058:
                     safe = True
         if safe is False:
-            await self.client.delete(message)
+            await message.delete()
         return
 
 
