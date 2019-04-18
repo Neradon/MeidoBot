@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 while true; do
-    git pull git://github.com/Neradon/MeidoBot.git
-    sed  -i '' 's/alreadysend/notsendyet/g' twitch.json
-    echo "waiting 2 seconds"
-    sleep 2
+    git fetch --all
+    git reset --hard origin/master
+    echo "waiting 5 seconds"
+    sleep 5
     ./bot.py
     echo " "
     echo "You can exit the loop by doing ctrl + c 2x"
