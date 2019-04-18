@@ -8,7 +8,7 @@ class voice(commands.Cog):
 
     async def on_message(self, message):
         print(str(message.author)+" - "+str(message.channel.id))
-        return
+        await self.client.process_commands(message)
 
 
 def setup(client):
