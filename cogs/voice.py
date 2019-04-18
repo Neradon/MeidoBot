@@ -10,9 +10,9 @@ class voice(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.channel.id == 460913402458537985:
-            print(str(message.author.voicestate.channel))
-            if message.author.voicestate.channel is not None:
-                print(str(message.author.voicestate.channel.id))
+            print(str(message.author.voice.channel))
+            if message.author.voice.channel is not None:
+                print(str(message.author.voice.channel.id))
 
         print(str(message.author)+" - "+str(message.channel.id))
         return
