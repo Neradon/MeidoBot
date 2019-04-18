@@ -17,7 +17,8 @@ startup_extensions = [
 "cogs.userinfo",
 "cogs.block_tenor",
 "cogs.magic8ball",
-"cogs.vrchat"
+"cogs.vrchat",
+"cogs.voice"
 ]
 
 client = discord.Client()
