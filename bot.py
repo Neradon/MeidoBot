@@ -48,9 +48,15 @@ client.remove_command('help')
 '''
 client.load_extension("jishaku")
 '''
+
+async def dontcrash():
+    channels = client.get_all_channels()
+    asyncio.sleep(50)
+
 async def background_loop():
+    await client.wait_until_ready()
     while True:
-        await client.wait_until_ready()
+
         worldIdToCheck = ""
         with open("worlds.json") as json_file:
             worlds = json.load(json_file)
@@ -183,7 +189,7 @@ if __name__ == "__main__":
         except Exception as e:
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
-
+client.loop.create_task(dontcrash())
 client.loop.create_task(background_loop())
 client.loop.create_task(twitchlive())
 client.run(token, bot=True, reconnect=True)
