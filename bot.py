@@ -41,6 +41,7 @@ client.api = VRChatAPI(vrcuser, vrcpw)
 client.api.authenticate()
 client.cuttly = cuttly
 client.friends = []
+client.friendRequests  = []
 client.acceptFriends = []
 client.vrcCalls = []
 
@@ -87,6 +88,8 @@ async def background_loop():
 
         await client.change_presence(activity=discord.Activity(name=onlinemaid, type=3))
         print("updated maid count, now " + str(len(client.friends)))
+        await asyncio.sleep(60)
+        client.friendRequests = client.api.getFriendRequests()
 
         if worldIdToCheck != "":
             print("Waiting for Worldcheckcooldown...")
@@ -100,15 +103,12 @@ async def background_loop():
             with open("worlds.json", "w") as outfile:
                 json.dump(worlds, outfile)
         if len(client.acceptFriends) > 0:
-            await asyncio.sleep(60)
-            friends = client.api.getFriendRequests()
-            for f in friends:
-                print("Friendrequest: "+f.senderUsername)
-                if f.senderUsername in client.acceptFriends:
-                    print("Accepting " + f.senderUsername + " with id: " + f.id)
+            for f in client.friendRequests:
+                if f.displayName in client.acceptFriends:
+                    print("Accepting " + f.displayName + " with id: " + f.id)
                     await asyncio.sleep(60)
                     client.api.acceptFriendRequest(f.id)
-                    client.acceptFriends.remove(f.senderUsername)
+                    client.acceptFriends.remove(f.displayName)
                     break
 
 

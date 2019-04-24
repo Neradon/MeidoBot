@@ -16,6 +16,8 @@ class vrchat(commands.Cog):
         friends = self.client.friends
         worldShortcuts = {}
         for f in friends:
+            if f.displayName == "Nera":
+                f.displayName = "Nera <3"
             s += f.displayName + " - "
             if f.location.worldId == "private":
                 s += f.worldName + " <a:HNNNNG:470332847190966319>"
@@ -45,18 +47,49 @@ class vrchat(commands.Cog):
         await ctx.send(s)
 
     @commands.command()
-    async def addFriend(self, ctx, name):
+    async def offline(self, ctx):
+        s = "Ghosto~"
+        await ctx.send(s)
 
+    @commands.command()
+    async def addFriend(self, ctx, name):
         if name != "":
-            if name in self.client.acceptFriends:
+            if name in self.client.addFriends:
                 s = "You are already in my list!"
             else:
-                s = "Added you to my list!"
+                s = "I will accept your friendrequest ^.^"
                 self.client.acceptFriends.append(name)
         else:
             s = "Syntax is $addFriend YourVRChatName"
         await ctx.send(s)
 
+    @commands.command()
+    async def listFriendRequests(self, ctx):
+        s = "**[Friendrequests]**\n"
+        for f in self.client.friendRequests:
+            s += f.displayName+"\n"
+
+        if len(self.client.acceptFriends) > 0:
+            s += "\n**[On my auto accept list]**\n"
+            for f in self.client.acceptFriends:
+                s += f+"\n"
+        await ctx.send(s)
+
+    @commands.command()
+    async def name(self, ctx):
+        s = "My VRChat name is **Maidobot** (∪ ◡ ∪)\n"
+        s += "I'm always happy to meet new people (✿◠‿◠)"
+        await ctx.send(s)
+
+    @commands.command()
+    async def help(self, ctx):
+        s = "**[VRChat Commands]**\n"
+        s += "$online - List all online friends of Meido\n"
+        s += "$offline - List all offline friends of Meido\n"
+        s += "$addFriend \"YourVRChatName\" - Adds your name to the auto accept list\n"
+        s += "$listFriendRequests - Lists all friendrequests Meido has at the moment\n"
+        s += "$name - Shows Meidos VRChat name\n"
+        await ctx.send(s)
 
 def setup(client):
     client.add_cog(vrchat(client))
