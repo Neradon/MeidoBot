@@ -67,12 +67,15 @@ class vrchat(commands.Cog):
     async def listFriendRequests(self, ctx):
         s = "**[Friendrequests]**\n"
         for f in self.client.friendRequests:
-            s += f.displayName+"\n"
+            s += f.username+"\n"
 
         if len(self.client.acceptFriends) > 0:
             s += "\n**[On my auto accept list]**\n"
             for f in self.client.acceptFriends:
                 s += f+"\n"
+
+        if s == "**[Friendrequests]**\n":
+            s = "No friendrequests"
         await ctx.send(s)
 
     @commands.command()

@@ -104,11 +104,11 @@ async def background_loop():
                 json.dump(worlds, outfile)
         if len(client.acceptFriends) > 0:
             for f in client.friendRequests:
-                if f.displayName in client.acceptFriends:
-                    print("Accepting " + f.displayName + " with id: " + f.id)
+                if f.username in client.acceptFriends:
+                    print("Accepting " + f.username + " with id: " + f.id)
                     await asyncio.sleep(60)
                     client.api.acceptFriendRequest(f.id)
-                    client.acceptFriends.remove(f.displayName)
+                    client.acceptFriends.remove(f.username)
                     break
 
 
