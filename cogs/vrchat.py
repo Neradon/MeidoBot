@@ -16,8 +16,6 @@ class vrchat(commands.Cog):
         friends = self.client.friends
         worldShortcuts = {}
         for f in friends:
-            if f.displayName == "Nera":
-                f.displayName = "Nera <3"
             s += f.displayName + " - "
             if f.location.worldId == "private":
                 s += f.worldName + " <a:HNNNNG:470332847190966319>"
@@ -67,7 +65,7 @@ class vrchat(commands.Cog):
     async def listFriendRequests(self, ctx):
         s = "**[Friendrequests]**\n"
         for f in self.client.friendRequests:
-            s += f.username+"\n"
+            s += f.senderUsername+"\n"
 
         if len(self.client.acceptFriends) > 0:
             s += "\n**[On my auto accept list]**\n"
