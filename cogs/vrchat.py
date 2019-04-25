@@ -52,7 +52,7 @@ class vrchat(commands.Cog):
     @commands.command()
     async def addFriend(self, ctx, name):
         if name != "":
-            if name in self.client.addFriends:
+            if name in self.client.acceptFriends:
                 s = "You are already in my list!"
             else:
                 s = "I will accept your friendrequest ^.^"
