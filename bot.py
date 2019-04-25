@@ -57,61 +57,62 @@ async def dontcrash():
 async def background_loop():
     await client.wait_until_ready()
     while True:
-
-        worldIdToCheck = ""
-        with open("worlds.json") as json_file:
-            worlds = json.load(json_file)
-
-        client.friends = client.api.getFriends()
-
-        for f in client.friends:
-            if f.location.worldId in worlds:
-                f.worldName = worlds[f.location.worldId]
-            else:
-                f.worldName = "unknown"
-                if f.location.worldId != "private":
-                    print("unknown world "+f.location.worldId)
-                    if worldIdToCheck == "":
-                        worldIdToCheck = f.location.worldId
-                        print("have to check world: "+worldIdToCheck)
-                else:
-                    f.worldName = "private"
-
-
-        onlinemaid = str(len(client.friends))
-        if len(client.friends) == 1:
-            onlinemaid += " maid!"
-        else:
-            onlinemaid += " maids!"
-
-
-
-        await client.change_presence(activity=discord.Activity(name=onlinemaid, type=3))
-        print("updated maid count, now " + str(len(client.friends)))
-        await asyncio.sleep(60)
-        client.friendRequests = client.api.getFriendRequests()
-
-        if worldIdToCheck != "":
-            print("Waiting for Worldcheckcooldown...")
-            await asyncio.sleep(60)
-            print("Getting worldname: " + worldIdToCheck)
-            worldName = client.api.getWorldById(worldIdToCheck).name
+        try:
+            worldIdToCheck = ""
             with open("worlds.json") as json_file:
                 worlds = json.load(json_file)
-            worlds[worldIdToCheck] = worldName
 
-            with open("worlds.json", "w") as outfile:
-                json.dump(worlds, outfile)
-        if len(client.acceptFriends) > 0:
-            for f in client.friendRequests:
-                if f.senderUsername in client.acceptFriends:
-                    print("Accepting " + f.senderUsername + " with id: " + f.id)
-                    await asyncio.sleep(60)
-                    client.api.acceptFriendRequest(f.id)
-                    client.acceptFriends.remove(f.senderUsername)
-                    break
+            client.friends = client.api.getFriends()
+
+            for f in client.friends:
+                if f.location.worldId in worlds:
+                    f.worldName = worlds[f.location.worldId]
+                else:
+                    f.worldName = "unknown"
+                    if f.location.worldId != "private":
+                        print("unknown world "+f.location.worldId)
+                        if worldIdToCheck == "":
+                            worldIdToCheck = f.location.worldId
+                            print("have to check world: "+worldIdToCheck)
+                    else:
+                        f.worldName = "private"
 
 
+            onlinemaid = str(len(client.friends))
+            if len(client.friends) == 1:
+                onlinemaid += " maid!"
+            else:
+                onlinemaid += " maids!"
+
+
+
+            await client.change_presence(activity=discord.Activity(name=onlinemaid, type=3))
+            print("updated maid count, now " + str(len(client.friends)))
+            await asyncio.sleep(60)
+            client.friendRequests = client.api.getFriendRequests()
+
+            if worldIdToCheck != "":
+                print("Waiting for Worldcheckcooldown...")
+                await asyncio.sleep(60)
+                print("Getting worldname: " + worldIdToCheck)
+                worldName = client.api.getWorldById(worldIdToCheck).name
+                with open("worlds.json") as json_file:
+                    worlds = json.load(json_file)
+                worlds[worldIdToCheck] = worldName
+
+                with open("worlds.json", "w") as outfile:
+                    json.dump(worlds, outfile)
+            if len(client.acceptFriends) > 0:
+                for f in client.friendRequests:
+                    if f.senderUsername in client.acceptFriends:
+                        print("Accepting " + f.senderUsername + " with id: " + f.id)
+                        await asyncio.sleep(60)
+                        client.api.acceptFriendRequest(f.id)
+                        client.acceptFriends.remove(f.senderUsername)
+                        break
+
+        except Exception as e:
+            print("Error",e)
 
 
 
