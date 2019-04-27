@@ -98,8 +98,8 @@ class vrchat(commands.Cog):
         s = "Sent message!"
         with open("users.json") as json_file:
             users = json.load(json_file)
-        if user in users:
-            self.client.api.sendMessage(users[user],message)
+        if str(user).lower() in users:
+            self.client.api.sendMessage(users[str(user).lower()],message)
         else:
             s = "No user found for: "+user+" :("
         await ctx.send(s)
