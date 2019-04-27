@@ -92,5 +92,17 @@ class vrchat(commands.Cog):
         s += "$name - Shows Meidos VRChat name\n"
         await ctx.send(s)
 
+    @commands.command()
+    @commands.cooldown(1, 60, commands.BucketType.user)
+    async def sendmessage(self,ctx,user,message):
+        s = "Sent message!"
+        with open("users.json") as json_file:
+            users = json.load(json_file)
+        if user in users:
+            self.client.api.sendMessage(users[user],message)
+        else
+            s = "No user found for: "+user+" :("
+        await ctx.send(s)
+
 def setup(client):
     client.add_cog(vrchat(client))
