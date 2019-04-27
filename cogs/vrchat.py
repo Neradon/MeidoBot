@@ -96,6 +96,8 @@ class vrchat(commands.Cog):
     @commands.cooldown(1, 60, commands.BucketType.user)
     async def sendmessage(self,ctx,user,message):
         s = "Sent message!"
+        print(str(user))
+        print(str(message))
         with open("users.json") as json_file:
             users = json.load(json_file)
         if user in users:
