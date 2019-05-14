@@ -4,7 +4,7 @@ import json
 from discord.ext import commands
 from vrchat_api import VRChatAPI
 from requests.auth import HTTPBasicAuth
-
+from mcstatus import MinecraftServer
 
 class vrchat(commands.Cog):
     def __init__(self, client):
@@ -47,6 +47,15 @@ class vrchat(commands.Cog):
     @commands.command()
     async def offline(self, ctx):
         s = "Ghosto~"
+        await ctx.send(s)
+
+    @commands.command()
+    async def onlineinminecraft(self, ctx):
+        server = MinecraftServer.lookup("example.org:1234")
+        status = server.status()
+        s = "{0} players online: ".format(status.players.online)+"\n"
+        for p in status.players.sample:
+            s += p.name+"\n"
         await ctx.send(s)
 
     @commands.command()
