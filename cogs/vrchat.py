@@ -51,11 +51,15 @@ class vrchat(commands.Cog):
 
     @commands.command()
     async def onlineinminecraft(self, ctx):
-        server = MinecraftServer.lookup("mc.battlemaids.net")
-        status = server.status()
-        s = "{0} players online: ".format(status.players.online)+"\n"
-        for p in status.players.sample:
-            s += p.name+"\n"
+        s = ""
+        try:
+            server = MinecraftServer.lookup("mc.battlemaids.net")
+            status = server.status()
+            s = "{0} players online: ".format(status.players.online)+"\n"
+            for p in status.players.sample:
+                s += p.name+"\n"
+        except:
+            s = "0 players online"
         await ctx.send(s)
 
     @commands.command()

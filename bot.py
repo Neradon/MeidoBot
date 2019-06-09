@@ -44,6 +44,7 @@ client.friends = []
 client.friendRequests  = []
 client.acceptFriends = []
 client.vrcCalls = []
+client.mcfriends = 0
 
 client.remove_command('help')
 '''
@@ -79,10 +80,8 @@ async def background_loop():
 
 
             onlinemaid = str(len(client.friends))
-            if len(client.friends) == 1:
-                onlinemaid += " maid!"
-            else:
-                onlinemaid += " maids!"
+            onlinemaid += "+" + str(client.mcfriends) + " maids!"
+
 
 
 
@@ -110,10 +109,15 @@ async def background_loop():
                         client.api.acceptFriendRequest(f.id)
                         client.acceptFriends.remove(f.senderUsername)
                         break
-
         except Exception as e:
             print("Error",e)
 
+        try:
+            server = MinecraftServer.lookup("mc.battlemaids.net")
+            status = server.status()
+            client.mcfriends = status.players.online
+        except:
+            client.mcfriends = 0
 
 
         await asyncio.sleep(60)
