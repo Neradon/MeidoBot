@@ -46,7 +46,7 @@ class vrchat(commands.Cog):
 
     @commands.command()
     async def offline(self, ctx):
-        s = "Ghosto~"
+        s = "Unknown~"
         await ctx.send(s)
 
     @commands.command()
@@ -55,11 +55,13 @@ class vrchat(commands.Cog):
         try:
             server = MinecraftServer.lookup("mc.battlemaids.net")
             status = server.status()
-            s = "{0} players online: ".format(status.players.online)+"\n"
+            self.client.mcfriends = status.players.online
+            s = "{0} players online: ".format(self.client.mcfriends)+"\n"
             for p in status.players.sample:
                 s += p.name+"\n"
         except:
             s = "0 players online"
+            self.client.mcfriends = 0
         await ctx.send(s)
 
     @commands.command()

@@ -6,6 +6,7 @@ import requests
 import json
 from vrchat_api import VRChatAPI
 from discord.ext import commands
+from mcstatus import MinecraftServer
 
 startup_extensions = [
 "cogs.events",
