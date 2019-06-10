@@ -81,7 +81,7 @@ async def background_loop():
 
 
             onlinemaid = str(len(client.friends))
-            onlinemaid += "+" + str(client.mcfriends) + " maids!"
+            onlinemaid += "w" + str(client.mcfriends) + " maids!"
 
 
 
