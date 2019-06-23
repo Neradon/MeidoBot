@@ -13,8 +13,8 @@ class voice(commands.Cog):
         report = "STOP"
         try:
             r = requests.post("http://neradonien.goip.de:5000/erp", data={'message':message.clean_content,'author':message.author.name,'time':message.timestamp})
-            except Exception as e:
-            print("Error", e)
+        except Exception as e:
+            print(e)
 
         if message.channel.id == 460913402458537985:
             safe = False
