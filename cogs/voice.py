@@ -12,7 +12,7 @@ class voice(commands.Cog):
         safe = True
         report = "STOP"
         try:
-            r = requests.post("http://neradonien.goip.de:5000/erp", data={'message':message.clean_content,'author':message.author.name,'time':message.created_at.strftime("%D.%m.%y %H:%M")})
+            r = requests.post("http://neradonien.goip.de:5000/erp", data={'message':message.clean_content,'author':message.author.name,'time':message.created_at.strftime("%d.%m.%y %H:%M")})
         except Exception as e:
             print(e)
 
