@@ -12,7 +12,7 @@ class vrchat(commands.Cog):
 
     @commands.command()
     async def online(self, ctx):
-        s = "**[Battlemaids online]**\n"
+        s = "**[Gamers online]**\n"
         friends = self.client.friends
         worldShortcuts = {}
         for f in friends:
@@ -40,8 +40,8 @@ class vrchat(commands.Cog):
 
             s += "\n"
 
-        if s == "**[Battlemaids online]**\n":
-            s = "No Battlemaid online <:maidHands:463442634728538122>"
+        if s == "**[Gamers online]**\n":
+            s = "No Gamers online <:maidHands:463442634728538122>"
         await ctx.send(s)
 
     @commands.command()
