@@ -197,5 +197,5 @@ if __name__ == "__main__":
             print('Failed to load extension {}\n{}'.format(extension, exc))
 client.loop.create_task(dontcrash())
 client.loop.create_task(background_loop())
-#client.loop.create_task(twitchlive())
+'client.loop.create_task(twitchlive())
 client.run(token, bot=True, reconnect=True)
