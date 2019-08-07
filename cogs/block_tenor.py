@@ -12,7 +12,7 @@ class block_tenor(commands.Cog):
         text = message.content.lower()
         if "https://tenor.com" in text:
             await message.delete()
-        if "VR_Shana" in text:
+        elif "vr_shana" in text:
             await message.delete()
 
 def setup(client):
